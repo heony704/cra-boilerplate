@@ -13,13 +13,13 @@ See below for settings.
 
 ## How to Set
 
-1. Create react app.
+### 1. Create react app.
 
 ```bash
 yarn create react-app app-name --template typescript
 ```
 
-2. Install `eslint-config-airbnb`.
+### 2. Install `eslint-config-airbnb`.
 
 React App already has ESlint configuration. We can found `eslintConfig` in `package.json`.  
 However, To apply stricter rules, Install `eslint-config-airbnb`.
@@ -33,7 +33,7 @@ npx install-peerdeps --dev eslint-config-airbnb
 
 This Command is shortcut available on npm 5+.
 
-3. Apply packages related to TypeScript.
+### 3. Apply packages related to TypeScript.
 
 `eslint-config-airbnb-typescript` configures TypeScript lint rules.
 
@@ -45,7 +45,7 @@ yarn add -D eslint-config-airbnb-typescript |
             @typescript-eslint/parser@^5.0.0
 ```
 
-4. Create `.eslintrc` file.
+### 4. Create `.eslintrc` file.
 
 ```bash
 yarn create @eslint/config
@@ -57,7 +57,6 @@ Then `.eslintrc` file will be created.
 Modify `.eslintrc` file as below.
 
 ```json
-// ...
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -65,13 +64,11 @@ Modify `.eslintrc` file as below.
         "airbnb", // added !
         "airbnb-typescript" // added !
     ],
-    // ...
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module",
         "project": "./tsconfig.json" // added !
     },
-// ...
 ```
 
 Add to `extends` to apply the airbnb lint rules.  
@@ -80,7 +77,7 @@ If you do not add location of `tsconfig` file, ESLint does not know the TypeScri
 I prefer `json` file.  
 But if you choose a different filename extension, write according to that format.
 
-5. Apply `prettier`.
+### 5. Apply `prettier`.
 
 ```bash
 yarn add -D prettier eslint-config-prettier
@@ -92,7 +89,6 @@ ESLint can also do code formatting.
 And Modify `.eslintrc` file.
 
 ```json
-// ...
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -101,7 +97,6 @@ And Modify `.eslintrc` file.
         "airbnb-typescript",
         "prettier" // added !
     ],
-// ...
 ```
 
 Create `.prettierrc` file and Add any prettier rules you want.
@@ -123,7 +118,7 @@ As follows. (I used `json` file.)
 }
 ```
 
-6. Add vscode settings file.
+### 6. Add vscode settings file.
 
 Create a `.vscode` folder and Create a `settings.json` file in it.
 
@@ -152,7 +147,7 @@ This way you can use the same vscode settings everywhere.
 
 If your project is not only used in vscode, you can force lint and code formatting with `husky`. [Check out the details here.](https://create-react-app.dev/docs/setting-up-your-editor#formatting-code-automatically)
 
-7. Lint and code formatting using scripts.
+### 7. Lint and code formatting using scripts.
 
 Add the following scripts to `package.json`.
 
