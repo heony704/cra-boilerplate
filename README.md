@@ -1,46 +1,167 @@
-# Getting Started with Create React App
+# cra-boilerplate
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is boilerplate containing basic settings that are mainly used when creating a React project.
 
-## Available Scripts
+See below for settings.
 
-In the project directory, you can run:
+- `Create React App`
+- Package Manager: `yarn`
+- Language: `TypeScript`
+- Linter: `eslint-config-airbnb`, `eslint-config-airbnb-typescript`
+- Code Formatter: `prettier`
+- IDE/Editor: `vscode`
 
-### `yarn start`
+## How to Set
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Create react app.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+yarn create react-app app-name --template typescript
+```
 
-### `yarn test`
+2. Install `eslint-config-airbnb`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+React App already has ESlint configuration. We can found `eslintConfig` in `package.json`.  
+However, To apply stricter rules, Install `eslint-config-airbnb`.
 
-### `yarn build`
+[This is Github of `eslint-config-airbnb`.](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)  
+[This is ESLint configuration of React App.](https://github.com/facebook/create-react-app/blob/v4.0.3/packages/eslint-config-react-app/index.js)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npx install-peerdeps --dev eslint-config-airbnb
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This Command is shortcut available on npm 5+.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Apply packages related to TypeScript.
 
-### `yarn eject`
+`eslint-config-airbnb-typescript` configures TypeScript lint rules.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+[This is Github of `eslint-config-airbnb-typescript`.](https://github.com/iamturns/eslint-config-airbnb-typescript)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+yarn add -D eslint-config-airbnb-typescript |
+            @typescript-eslint/eslint-plugin@^5.13.0 |
+            @typescript-eslint/parser@^5.0.0
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+4. Create `.eslintrc` file.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+yarn create @eslint/config
+```
 
-## Learn More
+Choose the option you want.  
+Then `.eslintrc` file will be created.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Modify `.eslintrc` file as below.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```json
+// ...
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "airbnb", // added !
+        "airbnb-typescript" // added !
+    ],
+    // ...
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": "./tsconfig.json" // added !
+    },
+// ...
+```
+
+Add to `extends` to apply the airbnb lint rules.  
+If you do not add location of `tsconfig` file, ESLint does not know the TypeScript configuration of this project.
+
+I prefer `json` file.  
+But if you choose a different filename extension, write according to that format.
+
+5. Apply `prettier`.
+
+```bash
+yarn add -D prettier eslint-config-prettier
+```
+
+ESLint can also do code formatting.  
+`eslint-config-prettier` prevents conflicts between `ESLint` and `prettier`.
+
+And Modify `.eslintrc` file.
+
+```json
+// ...
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "airbnb",
+        "airbnb-typescript",
+        "prettier" // added !
+    ],
+// ...
+```
+
+Create `.prettierrc` file and Add any prettier rules you want.
+
+As follows. (I used `json` file.)
+
+```json
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "proseWrap": "never",
+  "endOfLine": "auto"
+}
+```
+
+6. Add vscode settings file.
+
+Create a `.vscode` folder and Create a `settings.json` file in it.
+
+```
+.vscode
+ ┗ settings.json
+```
+
+Write this in the file.
+
+```json
+{
+  // Use LF instead of CRLF.
+  "files.eol": "\n",
+
+  // Lint, code format every time you save.
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+```
+
+This way you can use the same vscode settings everywhere.
+
+If your project is not only used in vscode, you can force lint and code formatting with `husky`. [Check out the details here.](https://create-react-app.dev/docs/setting-up-your-editor#formatting-code-automatically)
+
+7. Lint and code formatting using scripts.
+
+Add the following scripts to `package.json`.
+
+```json
+  "scripts": {
+    "lint": "eslint ./src/**/*.{ts,tsx,js,jsx}",
+    "lint:fix": "eslint --fix ./src/**/*.{ts,tsx,js,jsx}",
+    "prettier": "prettier --write ./src/**/*.{ts,tsx}"
+  },
+```
+
+You can lint or code formatting an entire file using these scripts.
