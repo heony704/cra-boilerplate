@@ -160,3 +160,13 @@ Add the following scripts to `package.json`.
 ```
 
 You can lint or code formatting an entire file using these scripts.
+
+### + additional settings
+
+- Set line ending to `LF`.
+
+  Create `.gitattributes` file like below.
+
+  ```
+  * text eol=lf
+  ```
