@@ -25,12 +25,6 @@
     "lint:fix": "eslint --fix ./src/**/*.{ts,tsx,js,jsx}",
     "prettier": "prettier --write ./src/**/*.{ts,tsx}"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
