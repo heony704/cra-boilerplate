@@ -1,2 +1,6 @@
+# end of line is LF
 * text eol=lf
+
 *.jpg binary
+*.png binary
+*.ico binary
