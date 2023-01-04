@@ -206,3 +206,13 @@ Install the packages and start the project.
 yarn
 yarn start
 ```
+
+## If error `[eslint] Plugin "react" was conflicted between ".eslintrc.json" and "BaseConfig » ...` occurs,
+
+Check if the version of `eslint-plugin-react` and `eslint-plugin-react` of `react-scripts` are different.
+
+```bash
+yarn list eslint-plugin-react
+```
+
+If they are different, match the versions to one and reinstall.
