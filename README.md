@@ -170,3 +170,39 @@ You can lint or code formatting an entire file using these scripts.
   ```
   * text eol=lf
   ```
+
+## How to use
+
+### 1. Create a new repository on GitHub.
+
+Creating a new repository to apply boilerplate.
+
+### 2. Clone this boilerplate repository.
+
+```bash
+git clone https://github.com/heony704/cra-boilerplate.git newProjectName
+```
+
+Then a new folder will be created.
+
+### 3. Set new remote url.
+
+Because you cloned, the git remote url is this boilerplate repository url.  
+So, replace the git remote url with your new repository url.
+
+```bash
+git remote set-url origin newRepositoryUrl
+```
+
+### 4. Modify `package.json` and `README.md` to fit your project.
+
+Change the contents of `READEMEname` and `name` value of `package.json`.
+
+### 5. Start the Project.
+
+Install the packages and start the project.
+
+```bash
+yarn
+yarn start
+```
